@@ -27,6 +27,12 @@ const skills: string[] = [
 const happy: boolean = true;
 const finished: boolean = false;
 const goal: number = 5;
+
+// style用変数
+const skillColor: string = 'navy';
+const fontWeight: string = 'bold';
+// all-capsにする。全部大文字にするとき、all-capsというらしい。チュートリアルで出てくる表現。CSSでは、uppercase。
+const textCase: string = 'uppercase';
 ---
 
 <html lang='en'>
@@ -36,6 +42,18 @@ const goal: number = 5;
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
     <title>{pageTitle}</title>
+    <!-- styleの中で変数が使える！ -->
+    <style define:vars={{ skillColor, fontWeight, textCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+      }
+    </style>
   </head>
   <body>
     <a href='/'>Home</a>
@@ -71,7 +89,7 @@ const goal: number = 5;
     </ul>
     <p>My skills are:</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class='skill'>{skill}</li>)}
     </ul>
 
     {happy && <p>I am happy to be learning Astro!</p>}
