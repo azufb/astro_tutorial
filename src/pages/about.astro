@@ -1,9 +1,5 @@
 ---
-// サイト全体に適用するグローバルCSSをimport
-import '../styles/global.css';
-
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 type IdentityType = {
   firstName: string;
@@ -35,82 +31,53 @@ const finished: boolean = false;
 const goal: number = 5;
 
 // style用変数
-const skillColor: string = 'navy';
-const fontWeight: string = 'bold';
+// const skillColor: string = 'navy';
+// const fontWeight: string = 'bold';
 // all-capsにする。全部大文字にするとき、all-capsというらしい。チュートリアルで出てくる表現。CSSでは、uppercase。
-const textCase: string = 'uppercase';
+// const textCase: string = 'uppercase';
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>{pageTitle}</title>
-    <!-- styleの中で変数が使える！ -->
-    <style define:vars={{ skillColor, fontWeight, textCase }}>
-      h1 {
-        color: purple;
-        font-size: 4rem;
-      }
-      .skill {
-        color: var(--skillColor);
-        font-weight: var(--fontWeight);
-        text-transform: var(--textCase);
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
+<BaseLayout pageTitle={pageTitle}>
+  <h2>... and my new Astro site!</h2>
 
-    <h1>{pageTitle}</h1>
-    <h2>... and my new Astro site!</h2>
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page
+    on my website, and it's the first one I built myself!
+  </p>
 
-    <p>
-      I am working through Astro's introductory tutorial. This is the second
-      page on my website, and it's the first one I built myself!
-    </p>
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking
+    back and see how my journey is going!
+  </p>
 
-    <p>
-      This site will update as I complete more of the tutorial, so keep checking
-      back and see how my journey is going!
-    </p>
-
-    <p>Here are a few facts about me:</p>
-    <ul>
-      <li>My name is {identity.firstName}.</li>
-      <li>
-        I live in {identity.country} and I work as a {identity.occupation}.
-      </li>
-      {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Two of my hobbies are: {identity.hobbies[0]} and{' '}
-            {identity.hobbies[1]}
-          </li>
-        )
-      }
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-      {skills.map((skill) => <li class='skill'>{skill}</li>)}
-    </ul>
-
-    {happy && <p>I am happy to be learning Astro!</p>}
-
-    {finished && <p>I finished this tutorial!</p>}
-
+  <p>Here are a few facts about me:</p>
+  <ul>
+    <li>My name is {identity.firstName}.</li>
+    <li>
+      I live in {identity.country} and I work as a {identity.occupation}.
+    </li>
     {
-      goal === 5 ? (
-        <p>My goal is to finish in 5 days.</p>
-      ) : (
-        <p>My goal is not 5 days.</p>
+      identity.hobbies.length >= 2 && (
+        <li>
+          Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
+        </li>
       )
     }
-    <Footer />
-    <script>
-      import '../scripts/menu.js';
-    </script>
-  </body>
-</html>
+  </ul>
+  <p>My skills are:</p>
+  <ul>
+    {skills.map((skill) => <li class='skill'>{skill}</li>)}
+  </ul>
+
+  {happy && <p>I am happy to be learning Astro!</p>}
+
+  {finished && <p>I finished this tutorial!</p>}
+
+  {
+    goal === 5 ? (
+      <p>My goal is to finish in 5 days.</p>
+    ) : (
+      <p>My goal is not 5 days.</p>
+    )
+  }
+</BaseLayout>
