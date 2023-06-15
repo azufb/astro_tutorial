@@ -1,5 +1,5 @@
 ---
-import { MarkdownInstance } from '../../../node_modules/astro/dist/@types/astro';
+import type { MarkdownInstance } from '../../../node_modules/astro/dist/@types/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob(
