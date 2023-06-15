@@ -27,14 +27,14 @@ const skills: string[] = [
 ];
 
 const happy: boolean = true;
-const finished: boolean = false;
+const finished: boolean = true;
 const goal: number = 5;
 
 // style用変数
-// const skillColor: string = 'navy';
-// const fontWeight: string = 'bold';
+const skillColor: string = 'navy';
+const fontWeight: string = 'bold';
 // all-capsにする。全部大文字にするとき、all-capsというらしい。チュートリアルで出てくる表現。CSSでは、uppercase。
-// const textCase: string = 'uppercase';
+const textCase: string = 'uppercase';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -81,3 +81,15 @@ const goal: number = 5;
     )
   }
 </BaseLayout>
+
+<style define:vars={{ skillColor, fontWeight, textCase }}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+</style>
